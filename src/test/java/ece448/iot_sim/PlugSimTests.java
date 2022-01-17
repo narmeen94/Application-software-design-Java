@@ -19,6 +19,10 @@ public class PlugSimTests {
 
 		plug.switchOn();
 
+		//assertTrue(plug.isOn());
+	}
+
+	private void extracted(PlugSim plug) {
 		assertTrue(plug.isOn());
 	}
 }
