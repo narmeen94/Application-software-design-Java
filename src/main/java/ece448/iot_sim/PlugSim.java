@@ -28,6 +28,7 @@ public class PlugSim {
 	 */
 	synchronized public void switchOn() {
 		// P1: add your code here
+		on=true;
 	}
 
 	/**
@@ -35,6 +36,7 @@ public class PlugSim {
 	 */
 	synchronized public void switchOff() {
 		// P1: add your code here
+		on=false;
 	}
 
 	/**
@@ -42,6 +44,12 @@ public class PlugSim {
 	 */
 	synchronized public void toggle() {
 		// P1: add your code here
+		if(on){
+			on=false;
+		}
+		else{
+			on=true;
+		}
 	}
 
 	/**
