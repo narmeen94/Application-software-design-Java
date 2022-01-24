@@ -19,8 +19,104 @@ public class PlugSimTests {
 
 		plug.switchOn();
 
-		//assertTrue(plug.isOn());
+		assertTrue(plug.isOn());
 	}
+
+	@Test
+	public void testSwitchOff() {
+		PlugSim plug = new PlugSim("a");
+
+		plug.switchOff();
+
+		assertFalse(plug.isOn());
+	}
+
+	@Test
+	public void testToggleOn() {
+		PlugSim plug = new PlugSim("a");
+		if(plug.isOn()){
+			plug.toggle();
+			assertFalse(plug.isOn());
+		}
+
+	}
+
+	@Test
+	public void testToggleOff() {
+		PlugSim plug = new PlugSim("a");
+		if(!plug.isOn()){
+			plug.toggle();
+			assertTrue(plug.isOn());
+		}
+
+	}
+
+	@Test
+	public void testPowerZero() {
+		PlugSim plug = new PlugSim("a");
+		if(!plug.isOn()){
+			plug.measurePower();
+			
+			if (plug.getPower()==0){
+				//plug.measurePower();
+				boolean pow=true;
+				assertTrue(pow);
+			}
+		}
+	}
+	@Test		
+	public void testPowerNotZero() {
+		PlugSim plug = new PlugSim("a");
+		if(plug.isOn()){
+			plug.measurePower();
+					
+			if (plug.getPower()!=0){
+				//plug.measurePower();
+				boolean pow=false;
+				assertFalse(pow);
+					}
+			
+		}
+
+	}
+
+	@Test		
+	public void testPowerLessThanHundred() {
+		PlugSim plug = new PlugSim("a");
+		//if(plug.isOn()){
+			//plug.measurePower();
+			//plug.switchOn();
+			plug.updatePower(98);	
+			if (plug.getPower()<100){
+				//plug.switchOn();
+				plug.measurePower();
+				assertTrue(plug.getPower()<100);
+					}
+			
+		//}
+
+	}
+
+	@Test		
+	public void testPowerGreaterThanThreeHundred() {
+		PlugSim plug = new PlugSim("a");
+		if(plug.isOn()){
+			plug.measurePower();
+					
+			if (plug.getPower()>300){
+				plug.measurePower();
+				assertTrue(plug.getPower()<300);
+					}
+			
+		}
+
+	}
+
+	private void extracted2(PlugSim plug) {
+		plug.updatePower(0);
+	}
+
+
 
 	private void extracted(PlugSim plug) {
 		assertTrue(plug.isOn());
