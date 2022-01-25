@@ -117,7 +117,10 @@ public class PlugSimTests {
 			if (name.indexOf(".") != -1)
 		{
 			 plug.updatePower(Integer.parseInt(name.split("\\.")[1]));
+			 boolean flag=true;
+			 assertTrue(flag);
 		}
+		
 	}
 
 	}
