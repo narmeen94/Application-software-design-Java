@@ -31,7 +31,7 @@ public class PlugSimTests {
 		assertFalse(plug.isOn());
 	}
 
-	@Test
+	/*@Test
 	public void testToggle() {
 		PlugSim plug = new PlugSim("a");
 		if(plug.isOn()){
@@ -43,17 +43,30 @@ public class PlugSimTests {
 			assertTrue(plug.isOn());
 		}
 
-	}
+	}*/
 
-	/*@Test
+	@Test
 	public void testToggleOff() {
 		PlugSim plug = new PlugSim("a");
-		if(!plug.isOn()){
+		
+		if (plug.isOn()){
 			plug.toggle();
-			assertTrue(plug.isOn());
-		}
+		    assertFalse(plug.isOn());}
+		
 
-	}*/
+	}
+
+	@Test
+	public void testToggleOn() {
+		PlugSim plug = new PlugSim("a");
+		plug.switchOn();
+		plug.switchOff();
+		plug.toggle();
+		assertTrue(plug.isOn());
+
+		
+
+	}
 
 	@Test
 	public void testPowerZero() {
@@ -126,6 +139,19 @@ public class PlugSimTests {
 		}
 		
 	}*/
+	@Test		
+	public void testPowerDot() {
+		PlugSim plug = new PlugSim("a.100");
+		if(plug.isOn()){
+			plug.measurePower();
+			double power=plug.getPower();
+			//assertTrue(power==);
+					
+			
+			
+		}
+
+	}
 
 	@Test		
 	public void testGetName() {
