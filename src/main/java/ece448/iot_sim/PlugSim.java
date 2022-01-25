@@ -45,10 +45,12 @@ public class PlugSim {
 	synchronized public void toggle() {
 		// P1: add your code here
 		if(on){
-			on=false;
+			//on=false;
+			switchOff();
 		}
 		else{
-			on=true;
+			//on=true;
+			switchOn();
 		}
 	}
 
