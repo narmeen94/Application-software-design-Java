@@ -32,7 +32,7 @@ public class PlugSimTests {
 	}
 
 	@Test
-	public void testToggleOn() {
+	public void testToggle() {
 		PlugSim plug = new PlugSim("a");
 		if(plug.isOn()){
 			plug.toggle();
@@ -113,11 +113,11 @@ public class PlugSimTests {
 
 	}
 
-	@Test		
+	/*@Test		
 	public void testNameDotPower() {
 		PlugSim plug = new PlugSim("a");
 		if(plug.isOn()){
-			String name=plug.getName();
+			String name=plug.getName();}
 			if (name.indexOf(".") != -1)
 		{
 			 plug.updatePower(Integer.parseInt(name.split("\\.")[1]));
@@ -125,9 +125,20 @@ public class PlugSimTests {
 			 assertTrue(flag);
 		}
 		
-	}
+	}*/
+
+	@Test		
+	public void testGetName() {
+		PlugSim plug = new PlugSim("a");
+		String name=plug.getName();
+		
+			assertTrue(plug.getName()==name);
+			
+		
+
 
 	}
+
 	private void extracted2(PlugSim plug) {
 		plug.updatePower(0);
 	}
