@@ -38,10 +38,14 @@ public class PlugSimTests {
 			plug.toggle();
 			assertFalse(plug.isOn());
 		}
+		else{
+			plug.toggle();
+			assertTrue(plug.isOn());
+		}
 
 	}
 
-	@Test
+	/*@Test
 	public void testToggleOff() {
 		PlugSim plug = new PlugSim("a");
 		if(!plug.isOn()){
@@ -49,7 +53,7 @@ public class PlugSimTests {
 			assertTrue(plug.isOn());
 		}
 
-	}
+	}*/
 
 	@Test
 	public void testPowerZero() {

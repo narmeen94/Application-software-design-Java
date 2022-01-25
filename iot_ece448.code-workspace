@@ -13,5 +13,65 @@
 		},
 		"java.dependency.packagePresentation": "hierarchical",
 		"java.configuration.updateBuildConfiguration": "automatic"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "java",
+				"name": "Launch Current File",
+				"request": "launch",
+				"mainClass": "${file}"
+			},
+			{
+				"type": "java",
+				"name": "Launch GradeP1",
+				"request": "launch",
+				"mainClass": "ece448.grading.GradeP1",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch GradeP2",
+				"request": "launch",
+				"mainClass": "ece448.grading.GradeP2",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch GradeP3",
+				"request": "launch",
+				"mainClass": "ece448.grading.GradeP3",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch GradeP4",
+				"request": "launch",
+				"mainClass": "ece448.grading.GradeP4",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch GradeP5",
+				"request": "launch",
+				"mainClass": "ece448.grading.GradeP5",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch Main",
+				"request": "launch",
+				"mainClass": "ece448.iot_hub.Main",
+				"projectName": "iot_ece448"
+			},
+			{
+				"type": "java",
+				"name": "Launch Main(1)",
+				"request": "launch",
+				"mainClass": "ece448.iot_sim.Main",
+				"projectName": "iot_ece448"
+			}
+		]
 	}
 }
