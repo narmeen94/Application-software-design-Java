@@ -83,17 +83,14 @@ public class PlugSimTests {
 	@Test		
 	public void testPowerLessThanHundred() {
 		PlugSim plug = new PlugSim("a");
-		//if(plug.isOn()){
-			//plug.measurePower();
-			//plug.switchOn();
-			plug.updatePower(98);	
+		if(plug.isOn()){
+				
 			if (plug.getPower()<100){
-				//plug.switchOn();
 				plug.measurePower();
-				assertTrue(plug.getPower()<100);
+				assertTrue(plug.getPower()>100);
 					}
 			
-		//}
+		}
 
 	}
 
@@ -112,6 +109,18 @@ public class PlugSimTests {
 
 	}
 
+	@Test		
+	public void testNameDotPower() {
+		PlugSim plug = new PlugSim("a");
+		if(plug.isOn()){
+			String name=plug.getName();
+			if (name.indexOf(".") != -1)
+		{
+			 plug.updatePower(Integer.parseInt(name.split("\\.")[1]));
+		}
+	}
+
+	}
 	private void extracted2(PlugSim plug) {
 		plug.updatePower(0);
 	}
