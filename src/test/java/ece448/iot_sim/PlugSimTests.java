@@ -144,11 +144,12 @@ public class PlugSimTests {
 	}*/
 	@Test		
 	public void testPowerDot() {
-		PlugSim plug = new PlugSim("a.100");
+		PlugSim plug = new PlugSim("narmeen.148");
 		if(plug.isOn()){
 			plug.measurePower();
 			double power=plug.getPower();
-			//assertTrue(power==);
+			assertTrue(power==148);
+			
 					
 			
 			
