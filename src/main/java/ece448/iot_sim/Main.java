@@ -33,7 +33,10 @@ public class Main implements AutoCloseable {
 		for (String plugName: config.getPlugNames()) {
 			plugs.add(new PlugSim(plugName));
 		}
-
+		/*for (PlugSim plug:plugs){
+			plug.measurePower();
+		}*/
+        
 		// start power measurements
 		MeasurePower measurePower = new MeasurePower(plugs);
 		measurePower.start();

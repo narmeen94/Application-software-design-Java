@@ -104,11 +104,14 @@ public class PlugSimTests {
 	public void testPowerLessThanHundred() {
 		PlugSim plug = new PlugSim("a");
 		if(plug.isOn()){
+			plug.updatePower(80);
+			plug.measurePower();
+			assertTrue(plug.getPower()>100);
 				
-			if (plug.getPower()<100){
+			/*if (plug.getPower()<100){
 				plug.measurePower();
 				assertTrue(plug.getPower()>100);
-					}
+					}*/
 			
 		}
 
@@ -144,7 +147,7 @@ public class PlugSimTests {
 	}*/
 	@Test		
 	public void testPowerDot() {
-		PlugSim plug = new PlugSim("narmeen.148");
+		PlugSim plug = new PlugSim("narmeen\\.148");
 		if(plug.isOn()){
 			plug.measurePower();
 			double power=plug.getPower();
