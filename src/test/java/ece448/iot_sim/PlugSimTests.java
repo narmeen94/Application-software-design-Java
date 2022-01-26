@@ -168,6 +168,14 @@ public class PlugSimTests {
 
 	}
 
+	@Test
+	public void testUpdatePower(){
+		PlugSim plug=new PlugSim("a");
+		plug.updatePower(150);
+		double power=plug.getPower();
+		assertTrue(power==150);
+	}
+
 	private void extracted2(PlugSim plug) {
 		plug.updatePower(0);
 	}
