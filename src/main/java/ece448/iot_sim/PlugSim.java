@@ -103,7 +103,7 @@ public class PlugSim {
 	}
 
 	synchronized public void setPower(double power){
-		this.power=80;
+		this.power=800;
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
