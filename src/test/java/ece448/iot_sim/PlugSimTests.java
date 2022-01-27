@@ -103,15 +103,17 @@ public class PlugSimTests {
 	public void testPowerLessThanHundred() {
 		PlugSim plug = new PlugSim("narmeen");
 		plug.switchOn();
+		plug.setPower(90);
 		plug.measurePower();
-		assertTrue(plug.getPower()<100);
+		assertTrue(plug.getPower()>100);
 
 	}
 
 	@Test		
 	public void testPowerGreaterThanThreeHundred() {
-		PlugSim plug = new PlugSim("a");
+		PlugSim plug = new PlugSim("narmeen");
 		plug.switchOn();
+		plug.setPower(600);
 		plug.measurePower();
 		assertTrue(plug.getPower()<300);
 
