@@ -91,7 +91,6 @@ public class PlugSimTests {
 			plug.measurePower();
 					
 			if (plug.getPower()!=0){
-				//plug.measurePower();
 				boolean pow=false;
 				assertFalse(pow);
 					}
@@ -102,49 +101,24 @@ public class PlugSimTests {
 
 	@Test		
 	public void testPowerLessThanHundred() {
-		PlugSim plug = new PlugSim("a");
-		if(plug.isOn()){
-			plug.updatePower(80);
-			plug.measurePower();
-			assertTrue(plug.getPower()>100);
-				
-			/*if (plug.getPower()<100){
-				plug.measurePower();
-				assertTrue(plug.getPower()>100);
-					}*/
-			
-		}
+		PlugSim plug = new PlugSim("narmeen");
+		plug.switchOn();
+		plug.measurePower();
+		assertTrue(plug.getPower()<100);
 
 	}
 
 	@Test		
 	public void testPowerGreaterThanThreeHundred() {
 		PlugSim plug = new PlugSim("a");
-		if(plug.isOn()){
-			plug.measurePower();
-					
-			if (plug.getPower()>300){
-				plug.measurePower();
-				assertTrue(plug.getPower()<300);
-					}
-			
-		}
+		plug.switchOn();
+		plug.measurePower();
+		assertTrue(plug.getPower()<300);
+
 
 	}
 
-	/*@Test		
-	public void testNameDotPower() {
-		PlugSim plug = new PlugSim("a");
-		if(plug.isOn()){
-			String name=plug.getName();}
-			if (name.indexOf(".") != -1)
-		{
-			 plug.updatePower(Integer.parseInt(name.split("\\.")[1]));
-			 boolean flag=true;
-			 assertTrue(flag);
-		}
-		
-	}*/
+	
 	@Test		
 	public void testPowerDot() {
 		PlugSim plug = new PlugSim("narmeen.148");
