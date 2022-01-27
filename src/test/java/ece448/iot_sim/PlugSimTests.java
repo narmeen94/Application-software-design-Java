@@ -103,7 +103,7 @@ public class PlugSimTests {
 	public void testPowerLessThanHundred() {
 		PlugSim plug = new PlugSim("narmeen");
 		plug.switchOn();
-		plug.setPower(80);
+		plug.updatePower(90);
 		plug.measurePower();
 		assertTrue(plug.getPower()>100);
 
@@ -113,9 +113,22 @@ public class PlugSimTests {
 	public void testPowerGreaterThanThreeHundred() {
 		PlugSim plug = new PlugSim("narmeen");
 		plug.switchOn();
-		plug.setPower(600);
+		plug.updatePower(600);
+		//plug.setPower(600);
 		plug.measurePower();
 		assertTrue(plug.getPower()>300);
+
+
+	}
+
+	@Test		
+	public void testPowerMiddle() {
+		PlugSim plug = new PlugSim("narmeen");
+		plug.switchOn();
+		plug.updatePower(200);
+		//plug.setPower(600);
+		plug.measurePower();
+		assertTrue((plug.getPower()<300)&&(plug.getPower()>100));
 
 
 	}
