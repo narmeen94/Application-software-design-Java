@@ -15,7 +15,7 @@ public class HTTPCommands implements RequestHandler {
 	private final TreeMap<String, PlugSim> plugs = new TreeMap<>();
 
 	public HTTPCommands(List<PlugSim> plugs) {
-		for (PlugSim plug: plugs)
+		for (PlugSim plug: plugs) // from plug to plugs
 		{
 			this.plugs.put(plug.getName(), plug);
 		}
@@ -35,16 +35,60 @@ public class HTTPCommands implements RequestHandler {
 		}
 
 		PlugSim plug = plugs.get(path.substring(1));
-		if (plug == null)
+		if (plug == null){
+			System.out.println("null");
 			return null; // no such plug
+		}
 
 		String action = params.get("action");
-		if (action == null)
-			return report(plug);
-
+		if (action == null) {
+			return report(plug);}
+		
 		// P2: add your code here, modify the next line if necessary
-		return "<html><body></body></html>";
-	}
+		
+
+		if (action.equals("on")){
+
+		   plug.switchOn();}
+		   //report(plug);}
+		if (action.equals("off")){
+		   plug.switchOff();}
+
+		if (action.equals("toggle")){
+		   plug.toggle();}
+		
+		//return "<html><body></body></html>";
+		return report(plug);
+	   }
+
+	
+
+		
+		
+
+/*if (path.equals("/plugName?action=on")){
+				PlugSim plug =plugs.get("plugName");
+				plugName.switchOn();
+				return report(plugName);}*/
+		//PlugSim plug=new PlugSim("aa.656");
+		/*if (path.equals("/a"))
+		   {
+		   return report(plug);}*/
+		
+		/*if (path.equals("/a?action=on")){
+			
+			plug.switchOn();
+			System.out.println("hey!");
+			return report(plug);*/
+		
+
+		
+		
+		
+	
+		
+        //report(plug);
+		
 
 	protected String listPlugs() {
 		StringBuilder sb = new StringBuilder();
