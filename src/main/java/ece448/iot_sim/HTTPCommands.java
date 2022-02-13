@@ -49,45 +49,26 @@ public class HTTPCommands implements RequestHandler {
 
 		if (action.equals("on")){
 
-		   plug.switchOn();}
-		   //report(plug);}
+		   plug.switchOn();
+		   plug.measurePower();
+	       plug.getPower();
+		   //report(plug);
+		}
 		if (action.equals("off")){
-		   plug.switchOff();}
+		   plug.switchOff();
+		   plug.measurePower();
+		   plug.getPower();
+		}
 
 		if (action.equals("toggle")){
-		   plug.toggle();}
+		   plug.toggle();
+		   plug.measurePower();
+		   plug.getPower();
+		}
 		
 		//return "<html><body></body></html>";
 		return report(plug);
-	   }
-
-	
-
-		
-		
-
-/*if (path.equals("/plugName?action=on")){
-				PlugSim plug =plugs.get("plugName");
-				plugName.switchOn();
-				return report(plugName);}*/
-		//PlugSim plug=new PlugSim("aa.656");
-		/*if (path.equals("/a"))
-		   {
-		   return report(plug);}*/
-		
-		/*if (path.equals("/a?action=on")){
-			
-			plug.switchOn();
-			System.out.println("hey!");
-			return report(plug);*/
-		
-
-		
-		
-		
-	
-		
-        //report(plug);
+		}
 		
 
 	protected String listPlugs() {
