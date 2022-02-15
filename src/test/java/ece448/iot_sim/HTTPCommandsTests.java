@@ -86,12 +86,22 @@ public void testNullPlug() {
     params.put("action","on");
     String path="/";
     HTTPCommands.handleGet(path,params);
-    String plugState=path.substring(1);
-    assertEquals(plugState,"");
 
-    //String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
-    //assertEquals(HTTPCommands.listPlugs(),pluglist);
 
+    assertEquals(plugs.indexOf(path.substring(1)),-1);
+
+    
+    
+    /*if(path.substring(1)==""){
+        PlugSim plug=null;
+        
+    }*/
+    
+    
+   
+    
+
+    
 }
 }
     
