@@ -15,11 +15,13 @@ public class HTTPCommands implements RequestHandler {
 	private final TreeMap<String, PlugSim> plugs = new TreeMap<>();
 
 	public HTTPCommands(List<PlugSim> plugs) {
-		for (PlugSim plug: plugs) // from plug to plugs
+		for (PlugSim plug: plugs) // from plug to plugs in treemap
 		{
 			this.plugs.put(plug.getName(), plug);
 		}
 	}
+
+	
 
 	@Override
 	public String handleGet(String path, Map<String, String> params) {
