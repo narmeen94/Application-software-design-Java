@@ -54,11 +54,16 @@ public void testplugNotSpecified() {
     HTTPCommands HTTPCommands=new HTTPCommands(plugs);
     Map<String, String> params=new TreeMap<>();
     
-    params.put("action","on");
+    params.put("action","null");
     String path="/";
     String output=HTTPCommands.handleGet(path,params);
+    if (path.equals("/")){
+        assertEquals(output,HTTPCommands.listPlugs());}
+        
     //String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
-    assertEquals(output,HTTPCommands.listPlugs());
+        
+    
+    
 }
 
 }
