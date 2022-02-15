@@ -57,8 +57,8 @@ public void testplugNotSpecified() {
     params.put("action","on");
     String path="/";
     String output=HTTPCommands.handleGet(path,params);
-    String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
-    assertEquals(output,pluglist);
+    //String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
+    assertEquals(output,HTTPCommands.listPlugs());
 }
 
 }
