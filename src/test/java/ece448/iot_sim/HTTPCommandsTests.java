@@ -57,8 +57,9 @@ public void testplugNotSpecified() {
     params.put("action","null");
     String path="/";
     String output=HTTPCommands.handleGet(path,params);
+    String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
     if (path.equals("/")){
-        assertEquals(output,HTTPCommands.listPlugs());}
+        assertEquals(output,pluglist);}
         
     //String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
         
@@ -90,22 +91,36 @@ public void testNullPlug() {
     if (exception==-1){
         PlugSim plug=null;
         assertEquals(plug,null);
-    }
+    
+}
+}
+
+@Test
+public void testActionOn() {
+    List<PlugSim> plugs = new ArrayList<PlugSim>();
+    PlugSim plug1=new PlugSim("a");
+    PlugSim plug2=new PlugSim("b.100");
+    PlugSim plug3=new PlugSim("cc");
+    PlugSim plug4=new PlugSim("dddd");
+
+    plugs.add(plug1);
+    plugs.add(plug2);
+    plugs.add(plug3);
+    plugs.add(plug4);
 
     
+    HTTPCommands HTTPCommands=new HTTPCommands(plugs);
+    Map<String, String> params=new TreeMap<>();
+    
+    params.put("action","on");
+    String path="/b.100";
+    HTTPCommands.handleGet(path,params);
+    //String pluglist="<html><body><p><a href='/a'>a</a></p><p><a href='/b.100'>b.100</a></p><p><a href='/cc'>cc</a></p><p><a href='/dddd'>dddd</a></p></body></html>";
+    plug2.switchOn();
+    plug2.measurePower();
+    plug2.getPower();
 
-    
-    
-    /*if(path.substring(1)==""){
-        PlugSim plug=null;
-        
-    }*/
-    
-    
-   
-    
-
-    
+    assertEquals(HTTPCommands.report(plug2),HTTPCommands.handleGet(path,params));
 }
 }
     
