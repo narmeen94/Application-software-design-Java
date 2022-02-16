@@ -89,6 +89,7 @@ public class HTTPCommands implements RequestHandler {
 
 	protected String report(PlugSim plug) {
 		String name = plug.getName();
+		plug.measurePower();
 		return String.format("<html><body>"
 			+"<p>Plug %s is %s.</p>"
 			+"<p>Power reading is %.3f.</p>"
