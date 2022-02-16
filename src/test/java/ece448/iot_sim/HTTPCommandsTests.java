@@ -86,9 +86,13 @@ public void testNullPlug() {
     params.put("action","on");
     String path="/";
     HTTPCommands.handleGet(path,params);
+    int exception=plugs.indexOf(path.substring(1));
+    if (exception==-1){
+        PlugSim plug=null;
+        assertEquals(plug,null);
+    }
 
-
-    assertEquals(plugs.indexOf(path.substring(1)),-1);
+    
 
     
     
