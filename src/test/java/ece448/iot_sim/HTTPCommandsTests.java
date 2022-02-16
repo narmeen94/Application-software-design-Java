@@ -87,11 +87,11 @@ public void testNullPlug() {
     plugsTree.put("a",plug1);
     
     params.put("action","on");
-    String path="/";
+    String path="/er";
     //HTTPCommands.handleGet(path,params);
     PlugSim plug=plugsTree.get(path.substring(1));
-    assertTrue(plug==null);
-    //assertTrue(HTTPCommands.handleGet(path,params)==null);
+    //assertTrue(plug==null);
+    assertTrue(HTTPCommands.handleGet(path,params)==null);
     
         //assertEquals(HTTPCommands.handleGet(path,params),plug);}
     
