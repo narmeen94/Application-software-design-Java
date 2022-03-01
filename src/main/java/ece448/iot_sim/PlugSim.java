@@ -2,6 +2,7 @@ package ece448.iot_sim;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
 
 /**
  * Simulate a smart plug with power monitoring.
@@ -11,6 +12,8 @@ public class PlugSim {
 	private final String name;
 	private boolean on = false;
 	private double power = 0; // in watts
+
+
 
 	public PlugSim(String name) {
 		this.name = name;
@@ -26,17 +29,17 @@ public class PlugSim {
 	/**
 	 * Switch the plug on.
 	 */
-	synchronized public void switchOn() {
-		// P1: add your code here
-		on=true;
-	}
+	// synchronized public void switchOn() {
+	// 	// P1: add your code here
+	// 	on=true;
+	// }
 
 	/**
 	 * Switch the plug off.
 	 */
 	synchronized public void switchOff() {
 		// P1: add your code here
-		on=false;
+		updateState(false);
 	}
 
 	/**
@@ -102,9 +105,45 @@ public class PlugSim {
 		return power;
 	}
 
-	//synchronized public void setPower(double power){
-		//this.power=80;
-	//}
+	//for publishing to MQTT broker, defining the observer. how do i synchronze it????
+	public static interface Observer {
+		 void update(String name, String key, String value);
+	}
 
-	private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
+	private final ArrayList<Observer> observers = new ArrayList<>();
+
+	synchronized public void addObserver(Observer observer) {
+
+	observers.add(observer);
+	observer.update(name, "state", on? "on": "off");
+	observer.update(name, "power", String.format("%.3f", power));
+}
+
+    synchronized public void switchOn() {
+		updateState(true);
+		}
+		
+	protected void updateState(boolean o) {
+		on = o;
+
+	logger.info("Plug {}: state {}", name, on? "on": "off");
+	for (Observer observer: observers) {
+		observer.update(name, "state", on? "on": "off");
+	}
+
+	}
+	
+
+	
+
+	
+		
+
+ private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
+
+
+
+
+
+
 }

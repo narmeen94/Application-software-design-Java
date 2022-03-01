@@ -46,8 +46,6 @@ public class HTTPCommands implements RequestHandler {
 		if (action == null) {
 			return report(plug);}
 		
-		// P2: add your code here, modify the next line if necessary
-		
 
 		if (action.equals("on")){
 

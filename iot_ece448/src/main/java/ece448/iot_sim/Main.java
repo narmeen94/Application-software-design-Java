@@ -44,15 +44,27 @@ public class Main implements AutoCloseable {
 		// start HTTP commands
 		this.http = new JHTTP(config.getHttpPort(), new HTTPCommands(plugs));
 		this.http.start();
-	}
 
+		// start MQTT client
+		this.mqtt = new MqttClient(config.getMqttBroker(),
+		config.getMqttClientId(), new MemoryPersistence());
+		this.mqtt.connect();
+	}
+		
 	@Override
 	public void close() throws Exception {
-		http.close();
+	    http.close();
+		mqtt.disconnect();
 	}
+		private final JHTTP http;
+		private final MqttClient mqtt;
 
-	private final JHTTP http;
+	
+
+	
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
 }
+
