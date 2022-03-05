@@ -18,7 +18,7 @@ public class Main implements AutoCloseable {
 		try (Main m = new Main(config))
 		{
 			// loop forever
-			for (;;)
+			for (;;) 
 			{
 				Thread.sleep(60000);
 			}

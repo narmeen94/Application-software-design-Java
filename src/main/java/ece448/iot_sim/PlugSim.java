@@ -3,6 +3,7 @@ package ece448.iot_sim;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
+import java.sql.Timestamp; 
 
 /**
  * Simulate a smart plug with power monitoring.
@@ -26,9 +27,23 @@ public class PlugSim {
 		return name;
 	}
 
-	/**
-	 * Switch the plug on.
-	 */
+	
+	 // Switch the plug on.
+	  synchronized public void switchOn() {
+		updateState(true);
+	}
+ 
+		
+	protected void updateState(boolean o) {
+		on = o;
+
+	   logger.info("Plug {}: state {}", name, on? "on": "off");
+	   for (Observer observer: observers) {
+		   observer.update(name, "state", on? "on": "off");
+	    }
+
+	}
+	 
 	// synchronized public void switchOn() {
 	// 	// P1: add your code here
 	// 	on=true;
@@ -90,7 +105,8 @@ public class PlugSim {
 		power = p;
 		logger.debug("Plug {}: power {}", name, power);
 		for (Observer observer: observers) {
-			observer.update(name, "power", String.format("%.3f", power));
+			observer.update(name, "power", new Timestamp(System.currentTimeMillis())
+			+"   "+String.format("%.3f", power));
 			
 		}
 	}
@@ -125,27 +141,8 @@ public class PlugSim {
 	observer.update(name, "power", String.format("%.3f", power));
 }
 
-    synchronized public void switchOn() {
-		updateState(true);
-		}
-		
-	protected void updateState(boolean o) {
-		on = o;
-
-	logger.info("Plug {}: state {}", name, on? "on": "off");
-	for (Observer observer: observers) {
-		observer.update(name, "state", on? "on": "off");
-	}
-
-	}
-	
-
-	
-
-	
-		
-
- private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
+    
+	private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
 
 
 
