@@ -142,7 +142,7 @@ public class PlugSim {
 		observers.add(observer);
 		observer.update(name, "state", on? "on": "off");
 		observer.update(name, "power", String.format("%.3f", power));
-}
+	}
 
     
 	private static final Logger logger = LoggerFactory.getLogger(PlugSim.class);
