@@ -78,9 +78,9 @@ public class MqttCommandsTests {
         String topic ="iot_ece448/action/a/toggle";
 
         MqttMessage msg=new MqttMessage();
-        
+        plug1.switchOn();
         mqtt.handleMessage(topic,msg);
-        assertTrue(plug1.isOn());
+        assertFalse(plug1.isOn());
         //assertEquals(plug1.getPower(),0,0);
     }
 
