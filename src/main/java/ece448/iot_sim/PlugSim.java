@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.sql.Timestamp; 
 
-/**
+/**g
  * Simulate a smart plug with power monitoring.
  */
 public class PlugSim {
@@ -32,6 +32,23 @@ public class PlugSim {
 	  synchronized public void switchOn() {
 		updateState(true);
 	}
+
+	synchronized public void switchOff() {
+		// P1: add your code here
+		updateState(false);
+	}
+
+	synchronized public void toggle() {
+		// P1: add your code here
+		if(on){
+			//on=false;
+			switchOff();
+		}
+		else{
+			//on=true;
+			switchOn();
+		}
+	}
  
 		
 	protected void updateState(boolean o) {
@@ -52,25 +69,12 @@ public class PlugSim {
 	/**
 	 * Switch the plug off.
 	 */
-	synchronized public void switchOff() {
-		// P1: add your code here
-		updateState(false);
-	}
+	
 
 	/**
 	 * Toggle the plug.
 	 */
-	synchronized public void toggle() {
-		// P1: add your code here
-		if(on){
-			//on=false;
-			switchOff();
-		}
-		else{
-			//on=true;
-			switchOn();
-		}
-	}
+	
 
 	/**
 	 * Measure power.
@@ -105,8 +109,7 @@ public class PlugSim {
 		power = p;
 		logger.debug("Plug {}: power {}", name, power);
 		for (Observer observer: observers) {
-			observer.update(name, "power", new Timestamp(System.currentTimeMillis())
-			+"   "+String.format("%.3f", power));
+			observer.update(name, "power",String.format("%.3f", power));
 			
 		}
 	}
@@ -136,9 +139,9 @@ public class PlugSim {
 
 	synchronized public void addObserver(Observer observer) {
 
-	observers.add(observer);
-	observer.update(name, "state", on? "on": "off");
-	observer.update(name, "power", String.format("%.3f", power));
+		observers.add(observer);
+		observer.update(name, "state", on? "on": "off");
+		observer.update(name, "power", String.format("%.3f", power));
 }
 
     
