@@ -79,8 +79,9 @@ public class MqttCommandsTests {
 
         MqttMessage msg=new MqttMessage();
         plug1.switchOn();
-        plug1.toggle();
+        //plug1.toggle();
         mqtt.handleMessage(topic,msg);
+        plug1.toggle();
         assertTrue(plug1.isOn());
         //assertEquals(plug1.getPower(),0,0);
     }
