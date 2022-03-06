@@ -30,7 +30,7 @@ public class MqttUpdatesTests {
     }
 
     @Test
-    public void testgetMessage() {
+    public void testgetMessageOff() {
         
         String value="off";
         String topicPrefix="iot_ece448";
@@ -40,12 +40,35 @@ public class MqttUpdatesTests {
             boolean b=true;
             assertTrue(b);
         }
-       //assertEquals( mqttUp.getMessage(value),msg);
-        //msg.toString();
-        
-        //assertEquals(msg,"off");
-        //assertEquals(topic,topicPrefix+"/update/a/power");
+       
     }
+    @Test
+    public void testgetMessageOn() {
+        
+        String value="on";
+        String topicPrefix="iot_ece448";
+        MqttUpdates mqttUp=new MqttUpdates(topicPrefix);
+        MqttMessage msg=new MqttMessage(value.getBytes());
+        if (msg==mqttUp.getMessage(value)){
+            boolean b=true;
+            assertTrue(b);
+        }
+       
+    }
+    @Test
+    public void testgetMessageToggle() {
+        
+        String value="toggle";
+        String topicPrefix="iot_ece448";
+        MqttUpdates mqttUp=new MqttUpdates(topicPrefix);
+        MqttMessage msg=new MqttMessage(value.getBytes());
+        if (msg==mqttUp.getMessage(value)){
+            boolean b=true;
+            assertTrue(b);
+        }
+       
+    }
+
 
     
     
