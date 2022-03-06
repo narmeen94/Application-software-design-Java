@@ -15,6 +15,7 @@ public class MqttUpdates {
     public MqttMessage getMessage(String value) {
     MqttMessage msg = new MqttMessage(value.getBytes());
     msg.setRetained(true);
+    //System.out.println(msg.toString()+"narmeen");
     return msg;
 }
     
