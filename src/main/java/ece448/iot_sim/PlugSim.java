@@ -51,34 +51,9 @@ public class PlugSim {
 	}
  
 		
-	protected void updateState(boolean o) {
-		on = o;
+	
 
-	   logger.info("Plug {}: state {}", name, on? "on": "off");
-	   for (Observer observer: observers) {
-		   observer.update(name, "state", on? "on": "off");
-	    }
-
-	}
 	 
-	// synchronized public void switchOn() {
-	// 	// P1: add your code here
-	// 	on=true;
-	// }
-
-	/**
-	 * Switch the plug off.
-	 */
-	
-
-	/**
-	 * Toggle the plug.
-	 */
-	
-
-	/**
-	 * Measure power.
-	 */
 	synchronized public void measurePower() {
 		if (!on) {
 			updatePower(0);
@@ -105,6 +80,16 @@ public class PlugSim {
 		}
 	}
 
+
+	protected void updateState(boolean o) {
+		on = o;
+
+	   logger.info("Plug {}: state {}", name, on? "on": "off");
+	   for (Observer observer: observers) {
+		   observer.update(name, "state", on? "on": "off");
+	    }
+
+	}
 	protected void updatePower(double p) {
 		power = p;
 		logger.debug("Plug {}: power {}", name, power);
