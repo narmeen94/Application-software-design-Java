@@ -112,4 +112,28 @@ public class MqttCommandsTests {
         //assertEquals(plug1.getPower(),0,0);
     
     }
+
+    @Test
+    public void testActionOffb() {
+        List<PlugSim> plugs = new ArrayList<PlugSim>();
+        PlugSim plug1=new PlugSim("a");
+        PlugSim plug2=new PlugSim("b.100");
+        PlugSim plug3=new PlugSim("cc");
+        PlugSim plug4=new PlugSim("dddd");
+    
+        plugs.add(plug1);
+        plugs.add(plug2);
+        plugs.add(plug3);
+        plugs.add(plug4);
+    
+        String topicPrefix="iot_ece448";
+        MqttCommands mqtt=new MqttCommands(plugs,topicPrefix);
+        String topic ="iot_ece448/action/b.100/off";
+
+        MqttMessage msg=new MqttMessage();
+        
+        mqtt.handleMessage(topic,msg);
+        assertFalse(plug1.isOn());
+        //assertEquals(plug1.getPower(),0,0);
+    }
 }
