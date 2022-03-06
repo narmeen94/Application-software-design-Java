@@ -17,8 +17,9 @@ public class MqttUpdatesTests {
         
         String topicPrefix="iot_ece448";
         MqttUpdates mqttUp=new MqttUpdates(topicPrefix);
-        String topic=mqttUp.getTopic("a","state");
-        assertEquals(topic,topicPrefix+"/update/a/state");
+        //String topic=mqttUp.getTopic("a","state");
+        assertEquals(mqttUp.getTopic("a","state"),"iot_ece448/update/a/state");
+       // assertEquals(topic,topicPrefix+"/update/a/state");
     }
     @Test
     public void testgetTopic2() {
