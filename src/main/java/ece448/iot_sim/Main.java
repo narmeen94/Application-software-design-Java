@@ -44,7 +44,8 @@ public class Main implements AutoCloseable {
 		this.http.start();
 
 		// start MQTT client
-		this.mqtt = new MqttClient(config.getMqttBroker(),config.getMqttClientId(), new MemoryPersistence());
+		this.mqtt = new MqttClient(config.getMqttBroker(),config.getMqttClientId(), 
+		new MemoryPersistence());
 		this.mqtt.connect();
 
 		MqttCommands mqttCmd = new MqttCommands(plugs, config.getMqttTopicPrefix());
@@ -75,8 +76,6 @@ public class Main implements AutoCloseable {
 		mqtt.disconnect();
 		}
 	
-
-
 	private final JHTTP http;
 	private final MqttClient mqtt;
 

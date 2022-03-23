@@ -115,7 +115,7 @@ public class PlugSim {
 		return power;
 	}
 
-	//for publishing to MQTT broker, defining the observer. how do i synchronze it????
+	//for publishing to MQTT broker, defining the observer.
 	public static interface Observer {
 		 void update(String name, String key, String value);
 	}
