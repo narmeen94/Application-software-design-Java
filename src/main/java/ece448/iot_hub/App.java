@@ -6,25 +6,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+
+import ece448.grading.GradeP3.MqttController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @SpringBootApplication
+
 public class App {
-	//@Autowired
-	
-	//public App(Environment env) throws Exception {
-		
-	@Bean(destroyMethod = "disconnect")
-	public MqttClient mqttClient(Environment env) throws Exception {
-	
+
+	@Bean(destroyMethod = "close")
+
+	public MqttController mqttController(Environment env) throws Exception {
 		String broker = env.getProperty("mqtt.broker");
 		String clientId = env.getProperty("mqtt.clientId");
-		MqttClient mqtt = new MqttClient(broker, clientId, new MemoryPersistence());
-		mqtt.connect();
+		String topicPrefix=env.getProperty("mqtt.topicPrefix");
+		MqttController mqttController = new MqttController(broker, clientId,topicPrefix);
+		mqttController.start();
 		logger.info("MqttClient {} connected: {}", clientId, broker);
-		return mqtt;
-		//return;
+		return mqttController;
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
