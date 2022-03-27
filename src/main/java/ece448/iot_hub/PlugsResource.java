@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ece448.grading.GradeP3;
 import ece448.grading.GradeP3.MqttController;
 
 @RestController
@@ -54,7 +53,7 @@ public class PlugsResource {
 	// 	Map<String,String> stateOnly=mqttController.getStates()
     
 
-	@GetMapping("/api/plugs/{plugname}")
+	@GetMapping("/api/plugs/{plugname:.+}")
 	public Object getPlug(
 		@PathVariable("plugname") String plugName,
 		@RequestParam(value = "action", required = false) String action) {

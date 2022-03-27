@@ -28,7 +28,7 @@ public class PlugsResourceTest {
     
         PlugsResource plugres=new PlugsResource(mqtt);
 
-        HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","on");
-        assertEquals(obj.get("state"),"on");
+        HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","toggle");
+        assertEquals(obj.get("state"),"toggle");
     }   
     }

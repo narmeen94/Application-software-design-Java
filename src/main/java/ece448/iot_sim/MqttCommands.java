@@ -48,7 +48,7 @@ public class MqttCommands {
 
             PlugSim plug=plugs.get(plugName);
 
-            //if (command.equals("action")){
+            if (command.equals("action")){
                 
                 if (val.equals("on")){
                     plug.switchOn();
@@ -61,7 +61,7 @@ public class MqttCommands {
                 }
                 
 
-           // }//
+            }
 
 
         }
