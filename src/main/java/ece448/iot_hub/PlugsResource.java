@@ -26,7 +26,7 @@ import ece448.grading.GradeP3.MqttController;
 @RestController
 public class PlugsResource {
 
-	//private final PlugsModel plugs;
+	
     private MqttController mqttController;
 
 	public PlugsResource(MqttController mqttController) {
@@ -51,33 +51,26 @@ public class PlugsResource {
 
 	// public Collection<Object> getPlugs() throws Exception {
 	// 	ArrayList<Object> ret = new ArrayList<>();
-	// 	Map<String,String> stateOnly=mqttController.getStates();
-		
-	// 	  for (String plug:stateOnly.keySet()){
-	// 		ret.add(makePlug(plug)); 
-			
-			
-	// 	}
-		
-	// 	logger.info("Plugs: {}", ret);
-	// 	return ret;
-    // }
+	// 	Map<String,String> stateOnly=mqttController.getStates()
     
 
 	@GetMapping("/api/plugs/{plugname}")
 	public Object getPlug(
 		@PathVariable("plugname") String plugName,
 		@RequestParam(value = "action", required = false) String action) {
-		if (action!= null)
+		if (action!=null)
 		{
-			mqttController.publishAction(plugName, action);
+            if(action.equals("on")||action.equals("off")||action.equals("toggle")){
+               mqttController.publishAction(plugName, action);
+            }
         }
         
         logger.info("Group {}: action {}", plugName, action);
 		//return null;
 		Object ret = makePlug(plugName);
 	    logger.info("PlugName {}: {}", plugName, ret);
-        return ret;}
+        return ret;
+    }
         
         protected Object makePlug(String plugName) {
             // modify code below to include plug states
