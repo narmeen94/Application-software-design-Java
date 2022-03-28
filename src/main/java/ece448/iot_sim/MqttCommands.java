@@ -36,7 +36,23 @@ public class MqttCommands {
             logger.info("MqttCmd {}", topic);
         
             // switch on/off/toggle here
-            //String[] splittedTopic=topic.substring(topicPrefix.length()+1).split("/");
+        //     String[] splittedTopic=topic.substring(topicPrefix.length()+1).split("/");
+        //     if (splittedTopic[0].equals("action")){
+        //         if (splittedTopic[2].equals("on")){
+        //             plugs.get(splittedTopic[1]).switchOn();
+        //         }
+        //         else if (splittedTopic[2].equals("off")){
+        //             plugs.get(splittedTopic[1]).switchOff();
+        //         }
+
+        //         else if (splittedTopic[2].equals("toggle")){
+        //             plugs.get(splittedTopic[1]).toggle();
+        //         }
+
+
+        //     }
+        // }
+
             String splittedTopic=topic.substring(topic.indexOf("action"));
             String[] str=splittedTopic.split("/");
             String command=str[0]; //action
@@ -49,6 +65,7 @@ public class MqttCommands {
             PlugSim plug=plugs.get(plugName);
 
             if (command.equals("action")){
+                if (val!= null){
                 
                 if (val.equals("on")){
                     plug.switchOn();
@@ -59,6 +76,7 @@ public class MqttCommands {
                 else if (val.equals("toggle")){
                     plug.toggle();
                 }
+            }
                 
 
             }

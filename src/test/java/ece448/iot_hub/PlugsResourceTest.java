@@ -16,19 +16,53 @@ import ece448.grading.GradeP3.MqttController;
 
 public class PlugsResourceTest {
 
-    private static final String broker = "tcp://127.0.0.1";
-	private static final String clientId = "iot_hub";
-    private static final String topicPrefix = "iot_ece448";
-    private MqttController mqtt;
+    private  final String broker = "tcp://127.0.0.1";
+	private  final String clientId = "iot_hub";
+    private  final String topicPrefix = "iot_ece448";
+
+    //MqttController mqtt=new MqttController( broker, clientId, topicPrefix);
+    //private MqttController mqtt;
 
     @Test
-    public void getPlugTest() {
+	public void testMakePlug() throws Exception {
         
-         //MqttController mqtt=new MqttController(broker,clientId,topicPrefix);
-    
-        PlugsResource plugres=new PlugsResource(mqtt);
+		MqttController mqtt0 = new MqttController(broker, clientId, topicPrefix);
+		 mqtt0.start();
+		 Thread.sleep(1000);
+		// clear(mqtt0);
+		// Thread.sleep(5000);
 
-        HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","toggle");
-        assertEquals(obj.get("state"),"toggle");
-    }   
-    }
+		PlugsResource plugres = new PlugsResource(mqtt0);
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
+        System.out.println(ret.get("state"));
+        System.out.println(ret);
+
+
+        //assertEquals(ret.get("state"),"off");
+        assertEquals(ret.toString(),"{name=a, state=off, power=0.000}");
+
+	}	
+}
+
+    // @Test
+    // public void getPlugTestOn() {
+        
+    //     MqttController mqtt=new MqttController(broker,clientId,topicPrefix);
+    
+    //     PlugsResource plugres=new PlugsResource(mqtt);
+
+    //     HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","on");
+    //     assertEquals(obj.get("state"),"on");
+    // }   
+
+    // @Test
+    // public void getPlugTestOff() {
+        
+    //      //MqttController mqtt=new MqttController(broker,clientId,topicPrefix);
+    
+    //     PlugsResource plugres=new PlugsResource(mqtt);
+
+    //     HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","off");
+    //     assertEquals(obj.get("state"),"off");
+    // }   
+    // }
