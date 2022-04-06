@@ -27,108 +27,145 @@ public class PlugsResourceTest {
 	public void MakePlugNullTest() throws Exception {
         
 		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
-		 mqtt.start();
-		 Thread.sleep(1000);
-		// clear(mqtt0);
-		// Thread.sleep(5000);
-
+		mqtt.start();
+        Thread.sleep(1000);
         PlugsResource plugres = new PlugsResource(mqtt);
-       // plugres.getPlug("a","off");
-        //Thread.sleep(1000);
         Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("e");
-        //System.out.println(ret.get("state"));
-        //System.out.println(ret);
-        //plugres.getPlug("a","off");
-
-
-
-        //assertEquals(ret.get("state"),"off");
         assertEquals(ret.toString(),"{name=e, state=null, power=null}");
 
 	}	
 
 
     @Test
-	public void MakePlugOffTest() throws Exception {
+	public void GetPlugOffTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		 mqtt.start();
+         Thread.sleep(1000);
+         PlugsResource plugres = new PlugsResource(mqtt);      
+        plugres.getPlug("a","off");
+        Thread.sleep(1000);
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
+        assertEquals(ret.toString(),"{name=a, state=off, power=0.000}");
+    }	
+
+    @Test
+	public void GetPlugOnTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+        Thread.sleep(1000);
+        PlugsResource plugres = new PlugsResource(mqtt); 
+        plugres.getPlug("b.100","off");
+        Thread.sleep(1000);
+        plugres.getPlug("b.100","on");
+        Thread.sleep(1000);
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("b.100");
+        assertEquals(ret.toString(),"{name=b.100, state=on, power=100.000}");
+
+    }	
+    
+    @Test
+	public void GetPlugToggleTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+        Thread.sleep(1000);
+        PlugsResource plugres = new PlugsResource(mqtt);      
+        plugres.getPlug("a","on");
+        Thread.sleep(1000);
+        plugres.getPlug("a","toggle");
+        Thread.sleep(1000);
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
+        assertEquals(ret.toString(),"{name=a, state=off, power=0.000}");
+
+    }	
+    @Test
+	public void getPlugActionNullTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+		Thread.sleep(1000);
+        PlugsResource plugres = new PlugsResource(mqtt);      
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
+        assertEquals(plugres.getPlug("a",null),ret);
+
+    }
+
+    @Test
+	public void getPlugActionWrongTest() throws Exception {
         
 		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
 		 mqtt.start();
 		 Thread.sleep(1000);
+
+        PlugsResource plugres = new PlugsResource(mqtt);      
+        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
+        assertEquals(plugres.getPlug("a","hello"),ret);
+
+    }
+
+    @Test
+	public void getStatesaTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+		Thread.sleep(1000);
 
         PlugsResource plugres = new PlugsResource(mqtt);      
         plugres.getPlug("a","off");
         Thread.sleep(1000);
+        plugres.getStates();
+        ArrayList<Object>ret = (ArrayList<Object>) plugres.getStates();
+        assertEquals(ret.get(0).toString(),"{name=a, state=off, power=0.000}");
+        
 
-        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("a");
-        //plugres.getPlug("a","off");
-        //PlugSim plug=new PlugSim("a");
-        //plug.switchOff();
+    }
 
-        //System.out.println(ret.get("state"));
-        System.out.println(ret);
-        //plugres.getPlug("a","off");
-
-        assertEquals(ret.toString(),"{name=a, state=off, power=0.000}");
-
-
-
-        //assertEquals(ret.get("state"),"off");
-        // assertEquals(ret.toString(),"{name=a, state="+mqtt.getState("a")+", power="+mqtt.getPower("a")+"}");
-
-    }	
     @Test
-	public void MakePlugOnTest() throws Exception {
+	public void getStatesbTest() throws Exception {
         
 		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
-		 mqtt.start();
-		 Thread.sleep(1000);
+		mqtt.start();
+		Thread.sleep(1000);
 
         PlugsResource plugres = new PlugsResource(mqtt);      
-        plugres.getPlug("b.100","on");
+        plugres.getPlug("b.100","off");
         Thread.sleep(1000);
-
-        Map<String, Object> ret = (HashMap<String, Object>) plugres.makePlug("b.100");
-        //plugres.getPlug("a","off");
-        //PlugSim plug=new PlugSim("a");
-        //plug.switchOff();
-
-        //System.out.println(ret.get("state"));
-        System.out.println(ret);
-        //plugres.getPlug("a","off");
-
-        assertEquals(ret.toString(),"{name=b.100, state=on, power=100.000}");
-
-
-
-        //assertEquals(ret.get("state"),"off");
-        // assertEquals(ret.toString(),"{name=a, state="+mqtt.getState("a")+", power="+mqtt.getPower("a")+"}");
-
-	}	
-
-    // @Test
-    // public void getPlugTestOn() throws Exception{
-        
-    //     MqttController mqtt=new MqttController(broker,clientId,topicPrefix);
-    //     mqtt.start();
-    //     Thread.sleep(1000);
-    
-    //     PlugsResource plugres=new PlugsResource(mqtt);
-
-    //     HashMap<String,Object>ret=(HashMap<String,Object>)plugres.getPlug("a","on");
-    //     System.out.println(ret.get("state"));
-    //     //ret=(HashMap<String,Object>)plugres.getPlug("a","on");
-    //     assertEquals(ret.get("state"),"on");
-    
-    // }   
-
-    // @Test
-    // public void getPlugTestOff() {
-        
-    //      //MqttController mqtt=new MqttController(broker,clientId,topicPrefix);
-    
-    //     PlugsResource plugres=new PlugsResource(mqtt);
-
-    //     HashMap<String,Object>obj=(HashMap<String,Object>)plugres.getPlug("a","off");
-    //     assertEquals(obj.get("state"),"off");
-    // }   
+        plugres.getStates();
+        ArrayList<Object>ret = (ArrayList<Object>) plugres.getStates();
+        assertEquals(ret.get(1).toString(),"{name=b.100, state=off, power=0.000}");
     }
+    @Test
+	public void getStatesccTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+		Thread.sleep(1000);
+
+        PlugsResource plugres = new PlugsResource(mqtt);      
+        plugres.getPlug("cc","off");
+        Thread.sleep(1000);
+        plugres.getStates();
+        ArrayList<Object>ret = (ArrayList<Object>) plugres.getStates();
+        assertEquals(ret.get(2).toString(),"{name=cc, state=off, power=0.000}");
+    }
+
+    @Test
+	public void getStatesddddTest() throws Exception {
+        
+		MqttController mqtt = new MqttController(broker, clientId, topicPrefix);
+		mqtt.start();
+		Thread.sleep(1000);
+
+        PlugsResource plugres = new PlugsResource(mqtt);      
+        plugres.getPlug("dddd","off");
+        Thread.sleep(1000);
+        plugres.getStates();
+        ArrayList<Object>ret = (ArrayList<Object>) plugres.getStates();
+        assertEquals(ret.get(3).toString(),"{name=dddd, state=off, power=0.000}");
+    }
+
+
+
+}

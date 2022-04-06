@@ -70,6 +70,7 @@ public class PlugsResource {
 	    logger.info("PlugName {}: {}", plugName, ret);
         return ret;
     }
+    
         
         protected Object makePlug(String plugName) {
             // modify code below to include plug states
@@ -80,7 +81,7 @@ public class PlugsResource {
             //ret.put("members", groups.getGroupMembers(group));
             return ret;
         }
-    
+        
         private static final Logger logger = LoggerFactory.getLogger(PlugsResource.class);	
     }
 
