@@ -142,7 +142,8 @@ public class GroupsResource {
 	public Collection<Object> getGroups() throws Exception {
 		ArrayList<Object> ret = new ArrayList<>();
 		for (String group: groups.getGroups()) {
-			ret.add(addGroup(group));
+			//ret.add(addGroup(group));
+			ret.add(makeGroup(group));
 			
 			
 		}
