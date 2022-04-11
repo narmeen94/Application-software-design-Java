@@ -28,16 +28,19 @@ import org.springframework.stereotype.Component;
 		return (members == null)? new ArrayList<>(): new ArrayList<>(members);
 	}
 
-	synchronized public String getGroupState(String group) {
+	synchronized public Object getGroupState(String group) {
 		ArrayList<String> memstate=new ArrayList<>();
 		int count=0;
 		String state="unknown";
 		for (String member:getGroupMembers(group))
 		{
-			memstate.add(mqttController.getState(group));
+			memstate.add(mqttController.getState(member));
 	        
-			
-			if ((mqttController.getState(member)).equals("on"))
+			if ((mqttController.getState(member))==null)
+			{
+				return null;
+			}
+			else if ((mqttController.getState(member)).equals("on"))
 			{
 				count=count+1;
 

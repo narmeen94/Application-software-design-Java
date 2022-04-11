@@ -142,7 +142,9 @@ public class GroupsResource {
 	public Collection<Object> getGroups() throws Exception {
 		ArrayList<Object> ret = new ArrayList<>();
 		for (String group: groups.getGroups()) {
-			ret.add(makeGroup(group));
+			ret.add(addGroup(group));
+			
+			
 		}
 		logger.info("Groups: {}", ret);
 		return ret;
@@ -152,21 +154,28 @@ public class GroupsResource {
 	public Object getGroup(
 		@PathVariable("group") String group,
 		@RequestParam(value = "action", required = false) String action) {
+			PlugsResource plugRes=new PlugsResource(mqttController);
+		for (String plugName:groups.getGroupMembers(group))
+		{
+			plugRes.getPlug(plugName, action);
+
+		}
 		// if (action == null) {
 		// 	Object ret = makeGroup(group);
 		// 	logger.info("Group {}: {}", group, ret);
 		// 	return ret;
 		// }
-		if (action!=null)
-		{
-            if(action.equals("on")||action.equals("off")||action.equals("toggle")){
+		// if (action!=null)
+		// {
+        //     if(action.equals("on")||action.equals("off")||action.equals("toggle")){
 
-		        for (String member:groups.getGroupMembers(group))
-			    {
-					mqttController.publishAction(member, action);				
-			    }
-            }
-        }
+		//         for (String member:groups.getGroupMembers(group))
+		// 	    {
+		// 			mqttController.publishAction(member, action);				
+		// 	    }
+        //     }
+		// }
+		
 
 		// modify code below to control plugs by publishing messages to MQTT broker
 		//List<String> members = groups.getGroupMembers(group);
@@ -188,12 +197,30 @@ public class GroupsResource {
 		logger.info("Group {}: removed", group);
 	}
 	protected Object makeGroup(String group) {
+		PlugsResource plugRes=new PlugsResource(mqttController);
 		// modify code below to include plug states
 		HashMap<String, Object> ret = new HashMap<>();
 		ret.put("name", group);
-		ret.put("state",groups.getGroupState(group));
-		ret.put("members", groups.getGroupMembers(group));
+		ArrayList<Object>mem=new ArrayList<>();
+		for (String plugName : groups.getGroupMembers(group))
+		{
+			mem.add(plugRes.makePlug(plugName));
+
+		}
+		ret.put("members",mem);
+		//ret.put("state",groups.getGroupState(group));
+		//ret.put("members", groups.getGroupMembers(group));
 		return ret;
+	}
+	protected Object addGroup(String group) {
+		//PlugsResource plugRes=new PlugsResource(mqttController);
+		// modify code below to include plug states
+		HashMap<String, Object> retgroup = new HashMap<>();
+		retgroup.put("name", group);
+		retgroup.put("state",groups.getGroupState(group));
+		//ret.put("state",groups.getGroupState(group));
+		//ret.put("members", groups.getGroupMembers(group));
+		return retgroup;
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(GroupsResource.class);	
