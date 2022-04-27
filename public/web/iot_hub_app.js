@@ -2,6 +2,8 @@
  * The App class is a controller holding the global state.
  * It creates all children controllers in render().
  */
+
+
 class IoTHubApp extends React.Component {
 
 	constructor(props) {

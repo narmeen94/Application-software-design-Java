@@ -28,41 +28,41 @@ import org.springframework.stereotype.Component;
 		return (members == null)? new ArrayList<>(): new ArrayList<>(members);
 	}
 
-	synchronized public Object getGroupState(String group) {
-		ArrayList<String> memstate=new ArrayList<>();
-		int count=0;
-		String state="unknown";
-		for (String member:getGroupMembers(group))
-		{
-			memstate.add(mqttController.getState(member));
+	// synchronized public Object getGroupState(String group) {
+	// 	ArrayList<String> memstate=new ArrayList<>();
+	// 	int count=0;
+	// 	String state="unknown";
+	// 	for (String member:getGroupMembers(group))
+	// 	{
+	// 		memstate.add(mqttController.getState(member));
 	        
-			if ((mqttController.getState(member))==null)
-			{
-				return null;
-			}
-			else if ((mqttController.getState(member)).equals("on"))
-			{
-				count=count+1;
+	// 		if ((mqttController.getState(member))==null)
+	// 		{
+	// 			return null;
+	// 		}
+	// 		else if ((mqttController.getState(member)).equals("on"))
+	// 		{
+	// 			count=count+1;
 
-			}
-			else if ((mqttController.getState(member)).equals("off"))
-			{
-				count=0;
-			}
+	// 		}
+	// 		else if ((mqttController.getState(member)).equals("off"))
+	// 		{
+	// 			count=0;
+	// 		}
 			
 			
-		}
-		if (count==memstate.size())
-		{
-		    state="on";
-		}
-		else if (count==0)
-		{
-			state= "off";
-		}
+	// 	}
+	// 	if (count==memstate.size())
+	// 	{
+	// 	    state="on";
+	// 	}
+	// 	else if (count==0)
+	// 	{
+	// 		state= "off";
+	// 	}
 		
-		return state;
-	}
+	// 	return state;
+	// }
 
 
 	

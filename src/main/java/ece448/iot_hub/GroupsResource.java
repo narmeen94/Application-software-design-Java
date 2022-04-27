@@ -50,25 +50,7 @@ public class GroupsResource {
 			plugRes.getPlug(plugName, action);
 
 		}
-		// if (action == null) {
-		// 	Object ret = makeGroup(group);
-		// 	logger.info("Group {}: {}", group, ret);
-		// 	return ret;
-		// }
-		// if (action!=null)
-		// {
-        //     if(action.equals("on")||action.equals("off")||action.equals("toggle")){
-
-		//         for (String member:groups.getGroupMembers(group))
-		// 	    {
-		// 			mqttController.publishAction(member, action);				
-		// 	    }
-        //     }
-		// }
 		
-
-		// modify code below to control plugs by publishing messages to MQTT broker
-		//List<String> members = groups.getGroupMembers(group);
 		Object ret = makeGroup(group);
 		//logger.info("Group {}: action {}, {}", group, action, members);
 		return ret;

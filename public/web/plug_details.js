@@ -1,3 +1,4 @@
+
 function plugAction(name, action) {
 	var url = "../api/plugs/" + name + "?action=" + action;
 	console.info("PlugDetails: request " + url);
@@ -20,8 +21,13 @@ window.PlugDetails = function (props) {
 			<button className="btn-primary" onClick={() => plugAction(plug.name, "on")}>
 				Switch On
 			</button>
+
 			<button className="btn-primary" onClick={() => plugAction(plug.name, "off")}>
 				Switch Off
+			</button>
+
+			<button className="btn-primary" onClick={() => plugAction(plug.name, "toggle")}>
+				Toggle
 			</button>
 		</div>);
 }
