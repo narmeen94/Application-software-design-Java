@@ -29,5 +29,16 @@ window.PlugDetails = function (props) {
 			<button className="btn-primary" onClick={() => plugAction(plug.name, "toggle")}>
 				Toggle
 			</button>
+			
+			<br></br>
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-12">
+					<Power 
+					display={createPowerDisplay("power_display")}
+					plugSelected={props.plugSelected} />
+					</div>
+				</div>
+			</div>
 		</div>);
 }

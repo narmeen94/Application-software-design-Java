@@ -3,7 +3,7 @@ const btnClassDel = "btn btn-danger btn-block";
 
 
 	
-function Member(props) {
+function MemberView(props) {
 	let current = {};
 	
 	current = props.allGroups.filter(val => (props.groupSelected.name === val.name ))[0];
@@ -16,8 +16,8 @@ function Member(props) {
 			return (
 				<div key={member.name}>
 					<p>Name: {member.name} </p>
-				<p>State: {member.state} </p>
-				<p>Power: {member.power} </p>
+				    <p>State: {member.state} </p>
+				    <p>Power: {member.power} </p>
 				</div>
 				);
 		});
@@ -49,7 +49,7 @@ function Member(props) {
     
 }
 
-function renameitlater(group, props) {
+function GetName(group, props) {
 	if(props.groupSelected!=null){
 		if(props.groupSelected.name==group.name){
 			return "btn-block btn-warning"
@@ -59,26 +59,26 @@ function renameitlater(group, props) {
 }
 
  
-function Header(props) {
+function GroupsList(props) {
 	return ( <div className="row">
 		<div style={{ display: "flex", justifyContent: "space-between"}}>
-			<div style={{ display: "flex", flexDirection: "column", padding: "16px", maxWidth: "250px"}}>
+			<div style={{ display: "flex", flexDirection: "column", paddingTop: "16px", maxWidth: "250px"}}>
 			   {props.allGroups.map((group, index) => 
 			 <button onClick={() => props.updateGroupSelected(group)} 
-			 className={renameitlater(group, props)} 
+			 className={GetName(group, props)} 
 			 key={index} style={{maxWidth: "250px"}}>
 				{group.name} 
 			 </button>
 			  )}
-			  </div>
+		 </div>
 				   {props.groupSelected&&  
 				   <div className="col-sm-16" style={{ paddingLeft: "35px"}}> 
 				       
-					 <Member {...props}
+					 <MemberView {...props}
 					 groupSelected={props.groupSelected} />
 					 </div>}
 
-					 </div>
+	  </div>
 			</div>);
 }
 
@@ -103,12 +103,6 @@ function Header(props) {
 		
 	
 
-
-
-
-
-
-
 /**
  * This is a stateless view showing inputs for add/replace groups.
  */
@@ -130,13 +124,10 @@ function AddGroup(props) {
 
 
 
-// 	);
-// }
-
 /**
- * This is a stateless view showing the whole members table.
+ * This is a stateless view showing the Group view
  */
-function MembersTable(props) {
+function GroupsView(props) {
 	console.info(props);
 return (
 		<div className="container">
@@ -151,7 +142,7 @@ return (
 			</div>	
 				<div className="row">
 				   <div className="col-sm-4">
-						<Header 
+						<GroupsList 
 						groupNames={props.members.get_group_names()} 
 						members={props.members.get_group_members()}
 						updateGroupSelected={props.updateGroupSelected}
@@ -161,8 +152,7 @@ return (
 						inputMembers={props.inputMembers}
 						onDeleteGroup={props.onDeleteGroup}
 					    groupAction={props.groupAction}
-						//currentname={props.current.name}
-						//currentmembers={props.current.members} 
+						
 						/>
 						<div>
 							
@@ -185,5 +175,5 @@ return (
        
         
 		
-window.Member = Member;
-window.MembersTable = MembersTable;
+window.MemberView = MemberView;
+window.GroupsView=GroupsView;

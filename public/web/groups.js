@@ -1,4 +1,3 @@
-//copying the entire code from members.js from professor's lecture codes.
 
 /**
  * A model for managing members in groups.
@@ -15,7 +14,7 @@ function create_members_model(groups) {
 		members.forEach(member => all_members.add(member));
 	}
 
-	var member_names = Array.from(all_members); //this has aal the members combned i.e from all groups
+	var member_names = Array.from(all_members); //this has all the members combned i.e from all groups
 	group_names.sort();
 	member_names.sort();
 
@@ -27,10 +26,6 @@ function create_members_model(groups) {
 		!group_members.has(group_name) ? false :
 			group_members.get(group_name).has(member_name);
 	that.get_group_members = group_name => group_members.get(group_name);
-
-	// console.log("=============================>",{groups})
-	// console.debug("Members Model",
-	// 	groups, members,member_names, group_members);
 
 	return that;
 }
@@ -55,12 +50,12 @@ class Members extends React.Component {
 	componentDidMount() {
 		console.info("Members componentDidMount()");
 		this.getGroups();
-		//setInterval(this.getGroups, 1000);
+		setInterval(this.getGroups, 1000); // for uodating the groups every second
 	}
 
 	render() {
 		console.info("----------------",this.props.groupSelected);
-		return (< MembersTable
+		return (< GroupsView
 			members={this.state.members}
 			allGroups={this.state.allGroups}
 			inputName={this.state.inputName} inputMembers={this.state.inputMembers}
@@ -73,9 +68,7 @@ class Members extends React.Component {
 			updateGroupSelected={this.props.updateGroupSelected}
 			groupSelected={this.props.groupSelected}
 			groupAction={this.groupAction}
-			//currentname={this.props.currentname}
-			//currentmembers={this.props.currentmembers}
-		    //current={this.props.current} 
+			 
 		/>);
 	}
 
@@ -106,22 +99,6 @@ class Members extends React.Component {
 		fetch("api/groups/" + groupName, postReq)
 			.then(rsp => this.getGroups())
 			.catch(err => console.error("Members: createGroup", err));
-	}
-
-	createManyGroups = groups => {
-		console.info("RESTful: create many groups " + JSON.stringify(groups));
-		var pendingReqs = groups.map(group => {
-			var postReq = {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(group.members)
-			};
-			return fetch("api/groups/" + group.name, postReq);
-		});
-
-		Promise.all(pendingReqs)
-			.then(() => this.getGroups())
-			.catch(err => console.error("Members: createManyGroup", err));
 	}
 
 	deleteGroup = groupName => {
@@ -165,16 +142,8 @@ class Members extends React.Component {
 
 		this.createGroup(name, members);     //here are members
 	}
-	onAddMemberToAllGroups = memberName => {
-		var groups = [];
-		for (var groupName of this.state.members.get_group_names()) {
-			var groupMembers = new Set(this.state.members.get_group_members(groupName));
-			groupMembers.add(memberName);
-			groups.push({ name: groupName, members: Array.from(groupMembers) });
-		}
-		this.createManyGroups(groups);
-	}
-
+	
+    //for the entire group action
 	groupAction = (group, action) => {
 		//todo
 		group.members.map(function (member) {

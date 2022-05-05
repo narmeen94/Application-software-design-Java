@@ -33,17 +33,17 @@ class GroupsApp extends React.Component {
 				<div className="col-sm-12">
 				<h3>Welcome To IoT Hub Groups</h3>
 				</div>
-                
-                
+
                 <div className="col-sm-12">
-				<Members
-				updateGroupSelected={this.updateGroupSelected}
-				groupSelected={this.state.groupSelected}/>
+					<Members
+					updateGroupSelected={this.updateGroupSelected}
+					groupSelected={this.state.groupSelected}/>
 
 				</div>
-                
-                
 			</div>
+			<div>
+				    <a href="index.html">To the Plugs</a>
+				</div>
 		</div>);
 	}
 }

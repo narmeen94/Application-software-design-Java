@@ -21,22 +21,34 @@
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
+	<!-- Apache ECharts -->
+	<script src="https://cdn.jsdelivr.net/npm/echarts@5.1.0/dist/echarts.min.js"></script>
+
 	<!-- IoT Hub App -->
 	<script type="text/babel" src="web/iot_hub_app.js"></script>
 	<script type="text/babel" src="web/plugs.js"></script>
 	<script type="text/babel" src="web/plugs_view.js"></script>
 	<script type="text/babel" src="web/plug_details.js"></script>
+    <!-- <script type="text/babel" src="web/power_app.js"></script> -->
+	<script type="text/babel" src="web/power.js"></script>
+    <script type="text/babel" src="web/power_display.js"></script>
 </head>
 
 <body>
+	
+	
 	<div id="app_container" />
 	<script type="text/babel">
-		$(document).ready(function () {
+	
+		$(document).ready(function () 
+		{
+			
 			ReactDOM.render(
-				<IoTHubApp />,
+				<IoTHubApp/>,
 				document.getElementById("app_container"));
 		});
 	</script>
+	
 </body>
 
 </html>
